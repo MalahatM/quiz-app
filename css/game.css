@@ -50,6 +50,10 @@
 	border-radius: 4px;
 
 }
+#question-box{
+	display: flex;
+	flex-direction: column;
+}
 h3{
 	background-color: #6757d9;
 	color: #fff;
