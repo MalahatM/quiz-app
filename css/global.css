@@ -13,3 +13,18 @@ body{
 	align-items: center;
 	padding-top: 100px;
 }
+@media (max-width: 900px) {
+    body {
+        font-size: 14px; /* Koochiktar kardan font baraye ekran mobile */
+        padding: 10px;
+    }
+    button {
+        width: 100%; /* Por kardan arz button baraye mobile */
+        padding: 12px;
+    }
+    .container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+    }
+}
