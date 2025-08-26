@@ -1,24 +1,25 @@
 const score = JSON.parse(localStorage.getItem('score'));
 const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-const scoreEle = document.querySelector("p");
-const button = document.querySelector("button");
-const input = document.querySelector("input");
+const scoreEle = document.querySelector("#end-section p");
+const button = document.querySelector("#end-section button");
+const input = document.querySelector("#end-section input");
 
 scoreEle.innerText = score || 0;
 
 const saveHandler = () => {
-    if (!input.value || !score) {
-        alert("Invalid username or score");
-    } else {
-        const finalScore = { name: input.value, score };
-        highScores.push(finalScore);
-        highScores.sort((a, b) => b.score - a.score);
-        highScores.splice(10);
+  if (!input.value || !score) {
+    alert("Invalid username or score");
+  } else {
+    const finalScore = { name: input.value, score };
+    highScores.push(finalScore);
+    highScores.sort((a, b) => b.score - a.score);
+    highScores.splice(10);
 
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        localStorage.removeItem("score"); 
-        window.location.assign("index.html"); 
-    }
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    localStorage.removeItem("score"); 
+
+    showSection("scores-section"); 
+  }
 };
 
 button.addEventListener("click", saveHandler);

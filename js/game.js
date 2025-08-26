@@ -22,67 +22,67 @@ let score = 0;
 let isAccepted = true;
 
 const fetchData = async () => {
-    try {
-        const response = await fetch(URL);
-        const json = await response.json();
-        formattedData = formatData(json.results);
-        start();
-    } catch (err) {
-        loader.style.display = "none";
-        error.style.display = "block";
-    }
+  try {
+    const response = await fetch(URL);
+    const json = await response.json();
+    formattedData = formatData(json.results);
+    start();
+  } catch (err) {
+    loader.style.display = "none";
+    error.style.display = "block";
+  }
 };
 
 const start = () => {
-    showQuestion();
-    loader.style.display = "none";
-    container.style.display = "block";
+  showQuestion();
+  loader.style.display = "none";
+  container.style.display = "block";
 };
 
 const showQuestion = () => {
-    questionNumber.innerText = questionIndex + 1;
-    const { question, answers, correctAnswerIndex } = formattedData[questionIndex];
-    correctAnswer = correctAnswerIndex;
-    questionText.innerText = question;
-    answerList.forEach((button, index) => {
-        button.innerText = answers[index];
-        button.className = "answer-text"; // reset class
-    });
+  questionNumber.innerText = questionIndex + 1;
+  const { question, answers, correctAnswerIndex } = formattedData[questionIndex];
+  correctAnswer = correctAnswerIndex;
+  questionText.innerText = question;
+  answerList.forEach((button, index) => {
+    button.innerText = answers[index];
+    button.className = "answer-text"; // reset class
+  });
 };
 
 const checkAnswer = (event, index) => {
-    if (!isAccepted) return;
-    isAccepted = false;
+  if (!isAccepted) return;
+  isAccepted = false;
 
-    const isCorrect = index === correctAnswer;
-    if (isCorrect) {
-        event.target.classList.add("correct");
-        score += CORRECT_BONUS;
-        scoreText.innerText = score;
-    } else {
-        event.target.classList.add("incorrect");
-        answerList[correctAnswer].classList.add("correct");
-    }
+  const isCorrect = index === correctAnswer;
+  if (isCorrect) {
+    event.target.classList.add("correct");
+    score += CORRECT_BONUS;
+    scoreText.innerText = score;
+  } else {
+    event.target.classList.add("incorrect");
+    answerList[correctAnswer].classList.add("correct");
+  }
 };
 
 const nextHandler = () => {
-    questionIndex++;
-    if (questionIndex < formattedData.length) {
-        isAccepted = true;
-        showQuestion();
-    } else {
-        finishHandler();
-    }
+  questionIndex++;
+  if (questionIndex < formattedData.length) {
+    isAccepted = true;
+    showQuestion();
+  } else {
+    finishHandler();
+  }
 };
 
 const finishHandler = () => {
-    localStorage.setItem("score", JSON.stringify(score));
-    window.location.assign("end.html"); 
+  localStorage.setItem("score", JSON.stringify(score));
+  showSection("end-section");  
 };
 
 window.addEventListener("load", fetchData);
 nextButton.addEventListener("click", nextHandler);
 finishButton.addEventListener("click", finishHandler);
 answerList.forEach((button, index) => {
-    button.addEventListener("click", (event) => checkAnswer(event, index));
+  button.addEventListener("click", (event) => checkAnswer(event, index));
 });
