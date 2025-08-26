@@ -15,11 +15,11 @@ body{
 }
 @media (max-width: 900px) {
     body {
-        font-size: 14px; /* Koochiktar kardan font baraye ekran mobile */
+        font-size: 14px;
         padding: 10px;
     }
     button {
-        width: 100%; /* Por kardan arz button baraye mobile */
+        width: 100%; 
         padding: 12px;
     }
     .container {
